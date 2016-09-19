@@ -1,0 +1,44 @@
+{
+    "name": "tomaskraus/dumb-mvc",
+    "keywords": ["php", "include", "require", "mvc"],
+    "homepage": "https://github.com/tomaskraus/dumb-mvc",
+    "description": "not even an MVC framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tomaskraus",
+            "email": "tomas.krausik@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomaskraus/dumb-mvc"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomaskraus/php-includer"
+        }
+    ],
+    "require": {
+        "php": "^5.3|^7.0",
+        "tomaskraus/php-includer": "@alpha"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.2"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "Dmc\\": "src/",
+            "Dmc\\Utils\\": "src/"
+            
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {           
+            "Dmc\\Test\\": "test/"
+        }
+    }
+}
