@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^5.4|^7.0",
-        "tomaskraus/php-includer": "@alpha"
+        "tomaskraus/php-includer": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2"
