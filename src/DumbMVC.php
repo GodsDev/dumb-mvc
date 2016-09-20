@@ -13,6 +13,24 @@ class DumbMVC {
     //context array
     public $context;
 
+    private static $dmcInstance;
+
+    /**
+     * dumb singleton
+     * no need to call, it is initialized by the ./../dumb-mvc.php loader
+     * @param \DumbMVC\DumbMVC $dumbMVCInstance
+     */
+    public static function setInstance(\DumbMVC\DumbMVC $dumbMVCInstance) {
+        self::$dmcInstance = $dumbMVCInstance;
+    }
+
+    /**
+     * just to help the IDE with the type hinting
+     * @return \DumbMVC\DumbMVC instance, null if not initialized
+     */
+    public static function instance() {
+        return self::$dmcInstance;
+    }
 
     /**
      *

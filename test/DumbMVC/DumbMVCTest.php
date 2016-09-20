@@ -63,5 +63,12 @@ class DumbMVCTest extends \PHPUnit_Framework_TestCase {
         $this->dmc->addContextException(new \Exception("exc example 2"));
         $this->assertCount(2, $this->dmc->contextExceptions());
     }
+
+
+    public function testDumbSingleton() {
+        $this->assertNull(\DumbMVC\DumbMVC::instance());
+        \DumbMVC\DumbMVC::setInstance($this->dmc);
+        $this->assertInstanceOf("\DumbMVC\DumbMVC", \DumbMVC\DumbMVC::instance());
+    }
 }
 
