@@ -23,11 +23,11 @@
     ],
     "require": {
         "php": "^5.4|^7.0",
-        "tomaskraus/php-includer": "@dev"
+        "tomaskraus/php-includer": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.2",
-        "tomaskraus/php-includer": "@dev"
+        "tomaskraus/php-includer": "dev-master"
     },
     
     "autoload": {
