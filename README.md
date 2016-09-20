@@ -18,7 +18,7 @@ via composer. include this snippet to composer.json
         }
     ],
     "require": {        
-        "tomaskraus/php-includer": "@alpha"
+        "tomaskraus/dumb-mvc": "dev-develop"
     },
 ```
 
