@@ -39,5 +39,6 @@
         "psr-4": {           
             "DumbMVC\\Test\\": "test/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
