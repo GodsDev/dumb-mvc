@@ -14,11 +14,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/tomaskraus/dumb-mvc"
+            "url": "https://github.com/tomaskraus/php-includer"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/tomaskraus/php-includer"
+            "url": "https://github.com/tomaskraus/dumb-mvc"
         }
     ],
     "require": {
