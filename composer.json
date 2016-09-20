@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": "^5.3|^7.0",
+        "php": "^5.4|^7.0",
         "tomaskraus/php-includer": "@alpha"
     },
     "require-dev": {
@@ -31,14 +31,13 @@
     
     "autoload": {
         "psr-4": {
-            "Dmc\\": "src/",
-            "Dmc\\Utils\\": "src/"
+            "DumbMVC\\": "src/"
             
         }
     },
     "autoload-dev": {
         "psr-4": {           
-            "Dmc\\Test\\": "test/"
+            "DumbMVC\\Test\\": "test/"
         }
     }
 }

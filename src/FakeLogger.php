@@ -1,6 +1,6 @@
 <?php
 
-namespace Dmc\Utils;
+namespace DumbMVC;
 
 /**
  * just to mock log4php basic logger behavior
