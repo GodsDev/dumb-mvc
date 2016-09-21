@@ -46,6 +46,11 @@ class DumbMVCTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse(isset($this->dmcWithTruePath->context["out"]["num"]));
     }
 
+    public function testContextHelper() {
+        $this->dmc->context["out"]["num"] = 1234;
+        $this->assertEquals(1234, $this->dmc->context["out"]["num"]);
+        $this->assertEquals(1234, $this->dmc->contextOut()["num"]);
+    }
 
     public function testRequireFile() {
         global $returnValFromRequire;
