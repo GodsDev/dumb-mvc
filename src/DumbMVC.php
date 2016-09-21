@@ -3,7 +3,7 @@
 namespace DumbMVC;
 
 /**
- * context array and smart includer
+ * DumbMVC provides just a context array, smart File includer and bunch of helper methods.
  *
  * @author Tomáš
  */
@@ -12,31 +12,59 @@ class DumbMVC {
     private $includer;
 
     /**
-     * context is an associative array, holds custom and pre-defined objects during the request
+     * An associative array, holds custom and predefined objects during the request.
+     *
+     * predefined keys are:
+     * <ul>
+     *      <li>config
+     *      <li>logger
+     *      <li>container
+     *      <li>out
+     *      <li>exceptions
+     * </ul>
+     *
+     * Has a public access, to ease new key additions.
+     *
+     * Several helper methods for read-only access to predefined context items are provided. Those method names start with "context".
+     *
+     * E.g. <code>$dumbMVC->contextOut()</code> is the same (for read-only) as the <code>$dumbMVC->context["out"]</code>
+     *
+     * @see contextConfig()
+     * @see contextLogger()
+     * @see contextContainer()
+     * @see contextOut()
+     * @see contextExceptions()
+     *
      */
     public $context;
 
     private static $dmcInstance;
 
     /**
-     * dumb singleton
-     * no need to call, it is initialized by the ./../dumb-mvc.php loader
-     * @param \DumbMVC\DumbMVC $dumbMVCInstance
+     * Initializes DumbMVC singleton.
+     *
+     * No need to be called, if you include dumb-mvc.php loader in your requested page.
+     * @param \DumbMVC\DumbMVC $dumbMVCInstance DumbMVC instance (use constructor)
+     *
+     * @see instance()
      */
     public static function setInstance(\DumbMVC\DumbMVC $dumbMVCInstance) {
         self::$dmcInstance = $dumbMVCInstance;
     }
 
     /**
-     * just to help the IDE with the type hinting
-     * @return \DumbMVC\DumbMVC instance, null if not initialized
+     * A DumbMVC singleton.
+     *
+     * Get DumbMVC object by using this method, to help the IDE with the type hinting.
+     * @return \DumbMVC\DumbMVC DumbMVC instance. Null if not initialized (using setInstance() method).
+     * @see setInstance()
      */
     public static function instance() {
         return self::$dmcInstance;
     }
 
     /**
-     * constructor
+     * Public constructor.
      * no need to call, it is initialized by the ./../dumb-mvc.php loader
      * @param \PhpIncluder\PI $includer for path resolving
      * @param type $logger logger
@@ -61,9 +89,10 @@ class DumbMVC {
     }
 
     /**
-     * sets context logger
+     * Sets a logger. That logger will be available via contextLogger() method or context["logger"] public variable.
      * @param type $logger logger
      * @return \DumbMVC\DumbMVC
+     * @see contextLogger()
      */
     public function setContextLogger($logger) {
         $this->context["logger"] = $logger;
@@ -82,7 +111,7 @@ class DumbMVC {
     }
 
     /**
-     * shorthand for ->context["config"] for reading
+     * A Shorthand for ->context["config"] for reading.
      * @return array configuration
      */
     public function contextConfig() {
@@ -90,9 +119,10 @@ class DumbMVC {
     }
 
     /**
-     * set a configuration object to a context
-     * @param object/array $config configuration
+     * Sets a configuration object to the context. That config will be available via contextConfig() method or context["config"] public variable.
+     * @param object|array $config configuration.
      * @return \DumbMVC\DumbMVC
+     * @see contextConfig
      */
     public function setContextConfig($config) {
         $this->context["config"] = $config;
@@ -100,8 +130,11 @@ class DumbMVC {
     }
 
     /**
-     * shorthand for ->context["out"] for reading
-     * data computed during the request can be stored here, using ->context["out"][{data-key}] = {something}
+     * A shorthand for ->context["out"] for reading.
+     *
+     * Data computed during the request can be stored here, e.g.
+     * <code>$dumbMVC->context["out"]["newKey"] = $newValue</code>
+     *
      * @return associative array of custom objects/values
      */
     public function contextOut() {
@@ -109,17 +142,19 @@ class DumbMVC {
     }
 
     /**
-     * shorthand for ->context["container"] for reading
-     * a dependency injection container object can be stored here
-     * @return DI container
+     * A shorthand for ->context["container"] for reading.
+     *
+     * A dependency injection container object can be stored here.
+     *
+     * @return object DI container instance.
      */
     public function contextContainer() {
         return $this->context["container"];
     }
 
     /**
-     * sets a dependency injection container
-     * @param object $container DI container
+     * Sets a dependency injection container. That container will be available via contextContainer() method or context["container"] public variable.
+     * @param object $container DI container instance.
      * @return \DumbMVC\DumbMVC
      */
     public function setContextContainer($container) {
@@ -128,7 +163,7 @@ class DumbMVC {
     }
 
     /**
-     * adds an exception to the context exception stack
+     * Adds an exception to the context exception stack.
      * @param \Throwable $exception
      * @see contextException()
      */
@@ -138,8 +173,8 @@ class DumbMVC {
     }
 
     /**
-     *
-     * @return boolean true if there is an exception in context exception stack
+     * Tests a context exception presence.
+     * @return boolean True if there is an exception in context exception stack. False otherwise.
      * @see contextException()
      */
     function isAnyContextException() {
@@ -147,22 +182,25 @@ class DumbMVC {
     }
 
     /**
-     * appends a path to the project root
-     * - uses smart path join, adds/removes path separators if neccessary
+     * Creates a string by appending a path to the project root.
+     *
+     * Uses a smart path join, adds or removes path separators if neccessary.
      *
      * @param string $path if null/empty
-     * @return string absolute path. if null/empty, a project root absolute path
+     * @return string An absolute path. A project root absolute path, if null/empty path is provided.
      */
     function fullPath($path = null) {
         return $this->includer->path($path);
     }
 
     /**
-     * smart require
-     * - uses smart path join, adds/removes path separators if neccessary
-     * - the beginning and the end of this require will be debug-logged
+     * Does a smart PHP require. Path needs to be always relative to the project root.
      *
-     * @param string $path file to require, relative to the project root
+     * <ul>
+     *   <li>Uses a smart path join, adds or removes path separators if neccessary.
+     *   <li>The beginning and the end of this require will be debug-logged.
+     * </ul>
+     * @param string $path Path of file to require, always relative to the project root.
      */
     function requireFile($path) {
         $requirePath = $this->fullPath($path);
