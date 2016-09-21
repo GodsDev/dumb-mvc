@@ -41,9 +41,9 @@ class DumbMVC {
     private static $dmcInstance;
 
     /**
-     * Initializes DumbMVC singleton.
+     * Initializes a DumbMVC singleton.
      *
-     * No need to be called, if you include dumb-mvc.php loader in your requested page.
+     * No need to be called, if you include the <code>dumb-mvc.php</code> loader in your requested page.
      * @param \DumbMVC\DumbMVC $dumbMVCInstance DumbMVC instance (use constructor)
      *
      * @see instance()
@@ -56,7 +56,7 @@ class DumbMVC {
      * A DumbMVC singleton.
      *
      * Get DumbMVC object by using this method, to help the IDE with the type hinting.
-     * @return \DumbMVC\DumbMVC DumbMVC instance. Null if not initialized (using setInstance() method).
+     * @return \DumbMVC\DumbMVC DumbMVC instance. Null if not initialized (using <code>setInstance()</code> method).
      * @see setInstance()
      */
     public static function instance() {
@@ -65,9 +65,9 @@ class DumbMVC {
 
     /**
      * Public constructor.
-     * no need to call, it is initialized by the ./../dumb-mvc.php loader
-     * @param \PhpIncluder\PI $includer for path resolving
-     * @param type $logger logger
+     * No need to be called, if you include the <code>dumb-mvc.php</code> loader in your requested page.
+     * @param \PhpIncluder\PI $includer for path resolving.
+     * @param type $logger Logger.
      */
     public function __construct(\PhpIncluder\PI $includer, $logger) {
         $this->includer = $includer;
@@ -81,15 +81,16 @@ class DumbMVC {
     }
 
     /**
-     * shorthand for ->context["logger"] for reading
-     * @return object
+     * A shorthand for <code>context["logger"]</code> for reading.
+     * @return object Logger.
+     * @see context
      */
     public function contextLogger() {
         return $this->context["logger"];
     }
 
     /**
-     * Sets a logger. That logger will be available via contextLogger() method or context["logger"] public variable.
+     * Sets a logger. That logger will be available via <code>contextLogger()</code> method or <code>context["logger"]</code> public variable.
      * @param type $logger logger
      * @return \DumbMVC\DumbMVC
      * @see contextLogger()
@@ -100,26 +101,28 @@ class DumbMVC {
     }
 
     /**
-     * exception stack
-     * suitable for storing multiple exceptions
+     * An exception stack. A shorthand for <code>context["exceptions"]</code> for reading.
      *
-     * @return array exception stack
+     * Suitable for storing multiple exceptions.
      *
+     * @return array Exception stack.
+     * @see context
      */
     public function contextExceptions() {
         return $this->context["exceptions"];
     }
 
     /**
-     * A Shorthand for ->context["config"] for reading.
-     * @return array configuration
+     * A shorthand for <code>context["config"]</code> for reading.
+     * @return object|array Configuration object.
+     * @see context
      */
     public function contextConfig() {
         return $this->context["config"];
     }
 
     /**
-     * Sets a configuration object to the context. That config will be available via contextConfig() method or context["config"] public variable.
+     * Sets a configuration object to the context. That config will be available via <code>contextConfig()</code> method or <code>context["config"]</code> public variable.
      * @param object|array $config configuration.
      * @return \DumbMVC\DumbMVC
      * @see contextConfig
@@ -130,32 +133,35 @@ class DumbMVC {
     }
 
     /**
-     * A shorthand for ->context["out"] for reading.
+     * A shorthand for <code>context["out"]</code> for reading.
      *
      * Data computed during the request can be stored here, e.g.
      * <code>$dumbMVC->context["out"]["newKey"] = $newValue</code>
      *
-     * @return associative array of custom objects/values
+     * @return Associative array of custom objects/values.
+     * @see context
      */
     public function contextOut() {
         return $this->context["out"];
     }
 
     /**
-     * A shorthand for ->context["container"] for reading.
+     * A shorthand for <code>context["container"]</code> for reading.
      *
      * A dependency injection container object can be stored here.
      *
      * @return object DI container instance.
+     * @see context
      */
     public function contextContainer() {
         return $this->context["container"];
     }
 
     /**
-     * Sets a dependency injection container. That container will be available via contextContainer() method or context["container"] public variable.
+     * Sets a dependency injection container. That container will be available via <code>contextContainer()</code> method or <code>context["container"]</code> public variable.
      * @param object $container DI container instance.
      * @return \DumbMVC\DumbMVC
+     * @see contextContainer()
      */
     public function setContextContainer($container) {
         $this->context["container"] = $container;
@@ -166,6 +172,7 @@ class DumbMVC {
      * Adds an exception to the context exception stack.
      * @param \Throwable $exception
      * @see contextException()
+     * @see context
      */
     function addContextException($exception) {
         $this->context["exceptions"][] = $exception;
@@ -176,6 +183,7 @@ class DumbMVC {
      * Tests a context exception presence.
      * @return boolean True if there is an exception in context exception stack. False otherwise.
      * @see contextException()
+     * @see context
      */
     function isAnyContextException() {
         return (count($this->context["exceptions"]) > 0);
