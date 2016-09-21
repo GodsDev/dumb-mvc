@@ -182,11 +182,11 @@ class DumbMVC {
     }
 
     /**
-     * Creates a string by appending a path to the project root.
+     * Creates a string by appending a relative path to the project root absolute path.
      *
      * Uses a smart path join, adds or removes path separators if neccessary.
      *
-     * @param string $path if null/empty
+     * @param string $path A path relative to the project root. Can be omitted.
      * @return string An absolute path. A project root absolute path, if null/empty path is provided.
      */
     function fullPath($path = null) {
@@ -194,7 +194,7 @@ class DumbMVC {
     }
 
     /**
-     * Does a smart PHP require. Path needs to be always relative to the project root.
+     * Does a smart, path-predictable PHP require. Path needs to be always relative to the project root.
      *
      * <ul>
      *   <li>Uses a smart path join, adds or removes path separators if neccessary.
