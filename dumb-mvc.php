@@ -9,11 +9,13 @@ require_once __DIR__ . "/../php-includer/src/PI.php";
 require_once __DIR__ . "/src/FakeLogger.php";
 require_once __DIR__ . "/src/DumbMVC.php";
 
-\DumbMVC\DumbMVC::setInstance(
-        new \DumbMVC\DumbMVC(
-        new \PhpIncluder\PI(__DIR__ . "/../../../"), new \DumbMVC\FakeLogger()
-        )
-);
+if (\DumbMVC\DumbMVC::instance() == null) {
+    \DumbMVC\DumbMVC::setInstance(
+            new \DumbMVC\DumbMVC(
+            new \PhpIncluder\PI(__DIR__ . "/../../../"), new \DumbMVC\FakeLogger()
+            )
+    );
+}
 
 //include file in app root dir
 $bootstrapFilename = \DumbMVC\DumbMVC::instance()->fullPath("dmc.bootstrap.php");
