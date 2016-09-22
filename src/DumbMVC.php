@@ -14,7 +14,7 @@ class DumbMVC {
     /**
      * An associative array, holds custom and predefined objects during the request.
      *
-     * predefined keys are:
+     * Predefined keys are:
      * <ul>
      *      <li>config
      *      <li>logger
@@ -56,7 +56,12 @@ class DumbMVC {
      * A DumbMVC singleton.
      *
      * Get DumbMVC object by using this method, to help the IDE with the type hinting.
+     *
+     *
+     *
      * @return \DumbMVC\DumbMVC DumbMVC instance. Null if not initialized (using <code>setInstance()</code> method).
+     * If you include the <code>dumb-mvc.php</code> loader in your requested page, it always returns the DumbMVC instance.
+     *
      * @see setInstance()
      */
     public static function instance() {
